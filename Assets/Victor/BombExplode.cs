@@ -1,0 +1,35 @@
+using UnityEngine;
+using System.Collections;
+using System.Drawing;
+using Color = UnityEngine.Color;
+
+public class BomExplode : MonoBehaviour
+{
+    public float[] countdown;
+    public SpriteRenderer spriteRenderer;
+    public GameObject Explosion;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        StartCoroutine(Explode());
+    }
+
+    public IEnumerator Explode()
+    {
+       for (int i = 0; i < countdown.Length; i++)
+        {
+
+            yield return new WaitForSeconds(countdown[i]);
+            if (spriteRenderer.color == Color.black)
+            {
+                spriteRenderer.color = Color.red;
+            }
+            else
+            {
+                spriteRenderer.color = Color.black;
+            }
+        }
+        Explosion.SetActive(true);
+        
+    }
+}
