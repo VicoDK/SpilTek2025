@@ -9,11 +9,12 @@ public class PlayerManager : MonoBehaviour
     public string ColoredPlayerText; //string matches with color of player
     public GameObject Player; // reference to player
     public int Wins; //number of wins
+    public 
 
     //add movement
     //add bombing
 
-    public void SetUp() 
+     void SetUp() 
     {
         //movement from component and connect with the number of player
         //bombing from the component and connect with the number of player
@@ -24,6 +25,17 @@ public class PlayerManager : MonoBehaviour
         {
         renderers[i].material.color = PlayerColor;
         }
+    }
+    public void DisabledControl() 
+    {
+    //movement enabled false
+    //bombing enabled fase
+    }
+    public void EnableControl() 
+    {
+    //movement enabled true
+    //Bombing enabled true
+
     }
     
     public void Reset() 
