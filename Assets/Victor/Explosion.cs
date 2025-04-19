@@ -17,6 +17,7 @@ public class Explosion : MonoBehaviour
     public RaycastHit2D[] hitsWest; 
     public RaycastHit2D[] hitsEast;
     public int Length;
+    public GameObject Fire;
 
     void Start()
     {
@@ -39,14 +40,22 @@ public class Explosion : MonoBehaviour
         {
             if (hit.transform.gameObject.tag == "Player")
             {
-            //hit player
+                Instantiate(Fire, hit.transform.position, Quaternion.identity);
+                hit.transform.gameObject.GetComponent<PlayerStats>().Death();
+            }
+            else if (hit.transform.gameObject.tag == "Air")
+            {
+                Instantiate(Fire, hit.transform.position, Quaternion.identity);
+
             }
             else if (hit.transform.gameObject.tag == "Destructible")
             {
+
                 Destroy(hit.transform.gameObject);
             }
             else if (hit.transform.gameObject.tag == "Wall")
             {
+                
                 return;
             }
 
