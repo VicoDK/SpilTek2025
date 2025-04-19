@@ -13,6 +13,15 @@
                     "processors": "NormalizeVector2",
                     "interactions": "Press",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "BombAttack",
+                    "type": "Button",
+                    "id": "db0075bd-05a3-4080-b82f-634d5b1b7902",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -70,6 +79,17 @@
                     "action": "movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "87ab5dc6-0856-4c76-9f1b-d2e802825a02",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BombAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

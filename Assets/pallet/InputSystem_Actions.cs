@@ -99,6 +99,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BombAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""db0075bd-05a3-4080-b82f-634d5b1b7902"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -156,6 +165,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87ab5dc6-0856-4c76-9f1b-d2e802825a02"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BombAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -742,6 +762,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_movement = m_Player.FindAction("movement", throwIfNotFound: true);
+        m_Player_BombAttack = m_Player.FindAction("BombAttack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -836,6 +857,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_movement;
+    private readonly InputAction m_Player_BombAttack;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -851,6 +873,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/movement".
         /// </summary>
         public InputAction @movement => m_Wrapper.m_Player_movement;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/BombAttack".
+        /// </summary>
+        public InputAction @BombAttack => m_Wrapper.m_Player_BombAttack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -880,6 +906,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @movement.started += instance.OnMovement;
             @movement.performed += instance.OnMovement;
             @movement.canceled += instance.OnMovement;
+            @BombAttack.started += instance.OnBombAttack;
+            @BombAttack.performed += instance.OnBombAttack;
+            @BombAttack.canceled += instance.OnBombAttack;
         }
 
         /// <summary>
@@ -894,6 +923,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @movement.started -= instance.OnMovement;
             @movement.performed -= instance.OnMovement;
             @movement.canceled -= instance.OnMovement;
+            @BombAttack.started -= instance.OnBombAttack;
+            @BombAttack.performed -= instance.OnBombAttack;
+            @BombAttack.canceled -= instance.OnBombAttack;
         }
 
         /// <summary>
@@ -1201,6 +1233,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMovement(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "BombAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBombAttack(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

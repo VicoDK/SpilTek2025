@@ -1,30 +1,11 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.InputSystem;
 public class movement : MonoBehaviour
 {
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private Tilemap collisionTilemap;
-    private InputSystem_Actions controls;
-
-    private void Awake()
-    {
-        controls = new InputSystem_Actions();
-    }
-
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        controls.Player.movement.performed += ctx => Move(ctx.ReadValue<Vector2>());
-    }
+    public PlayerInput controls;
 
     private void Move(Vector2 direction)
     {
@@ -42,6 +23,10 @@ public class movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (controls.actions.FindAction("movement").triggered)
+        {
+            Move(controls.actions.FindAction("movement").ReadValue<Vector2>());
+
+        }
     }
 }

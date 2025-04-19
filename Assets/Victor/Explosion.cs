@@ -31,6 +31,7 @@ public class Explosion : MonoBehaviour
         CheckHit(hitsSouth);
         CheckHit(hitsWest);
         CheckHit(hitsEast);
+        Destroy(transform.parent.gameObject);
 
     }
 
