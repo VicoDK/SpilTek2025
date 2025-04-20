@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 60e7f12a20471744c9bbbe1f3e2285a4
+guid: 907652a6b6837da49ab819d1308d8429
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: floortile
+  - name: walltile
     originalName: 
     pivot: {x: 0.5, y: 0}
     alignment: 9
@@ -135,7 +135,7 @@ ScriptedImporter:
       y: 4
       width: 64
       height: 64
-    spriteID: 46d8682d2e298814b9116841c3353d1d
+    spriteID: 481110e3144aaf147a22053027582882
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -148,17 +148,17 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 595918952
+      value0: 3561021050
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: floortile
+    name: walltile
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: floortile
+    - name: walltile
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -166,7 +166,7 @@ ScriptedImporter:
         y: 0
         width: 64
         height: 64
-      spriteId: 46d8682d2e298814b9116841c3353d1d
+      spriteId: 481110e3144aaf147a22053027582882
     linkedCells: []
     parentIndex: -1
   platformSettings:
