@@ -31,13 +31,15 @@ public class PlayerManager : MonoBehaviour
     }
     public void DisabledControl() 
     {
-    //movement enabled false
-    //bombing enabled fase
+        Movement.enabled = false;
+        bombing.enabled = false;
+   
     }
     public void EnableControl() 
     {
-    //movement enabled true
-    //Bombing enabled true
+        Movement.enabled = true;
+        bombing.enabled = true;
+    
 
     }
     
