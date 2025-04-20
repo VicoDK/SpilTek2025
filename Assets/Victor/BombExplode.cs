@@ -8,6 +8,7 @@ public class BomExplode : MonoBehaviour
     public float[] countdown;
     public SpriteRenderer spriteRenderer;
     public GameObject Explosion;
+    [HideInInspector] public GameObject Player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,6 +30,7 @@ public class BomExplode : MonoBehaviour
                 spriteRenderer.color = Color.black;
             }
         }
+        Player.GetComponent<PlayerControls>().isAttacking = false;
         Explosion.SetActive(true);
         
     }

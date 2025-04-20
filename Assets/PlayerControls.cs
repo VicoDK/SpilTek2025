@@ -5,12 +5,15 @@ public class PlayerControls : MonoBehaviour
 {
     public PlayerInput controls;
     public GameObject bomb;
+    public bool isAttacking = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Update()
     {
-        if (controls.actions.FindAction("BombAttack").triggered)
+        if (controls.actions.FindAction("BombAttack").triggered && !isAttacking)
         {
-            Instantiate(bomb, transform.position, Quaternion.identity);
+            isAttacking = true;
+            GameObject bombe = Instantiate(bomb, transform.position, Quaternion.identity);
+            bombe.GetComponent<BomExplode>().Player = this.gameObject;
         }
         
     }
