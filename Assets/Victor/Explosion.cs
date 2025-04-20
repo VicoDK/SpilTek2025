@@ -18,6 +18,7 @@ public class Explosion : MonoBehaviour
     public RaycastHit2D[] hitsEast;
     public int Length;
     public GameObject Fire;
+    public DWallManager dWallManager;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class Explosion : MonoBehaviour
         CheckHit(hitsWest);
         CheckHit(hitsEast);
         Destroy(transform.parent.gameObject);
+        GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(transform.position.x-0.5f, transform.position.y-0.5f);
 
     }
 
@@ -41,17 +43,20 @@ public class Explosion : MonoBehaviour
         {
             if (hit.transform.gameObject.tag == "Player")
             {
-                Instantiate(Fire, hit.transform.position, Quaternion.identity);
                 hit.transform.gameObject.GetComponent<PlayerStats>().Death();
             }
             else if (hit.transform.gameObject.tag == "Air")
             {
+
                 Instantiate(Fire, hit.transform.position, Quaternion.identity);
 
             }
             else if (hit.transform.gameObject.tag == "Destructible")
             {
 
+
+    
+                GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(hit.transform.position.x-0.5f, hit.transform.position.y-0.5f);
                 Destroy(hit.transform.gameObject);
             }
             else if (hit.transform.gameObject.tag == "Wall")
