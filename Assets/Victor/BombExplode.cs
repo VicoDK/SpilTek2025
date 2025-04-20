@@ -13,6 +13,7 @@ public class BomExplode : MonoBehaviour
     void Start()
     {
         StartCoroutine(Explode());
+        GameObject.Find("Dwalls").GetComponent<DWallManager>().ADDToList(transform.position.x-0.5f, transform.position.y-0.5f);
     }
 
     public IEnumerator Explode()

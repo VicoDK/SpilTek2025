@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class movement : MonoBehaviour
 {
     [SerializeField] private Tilemap groundTilemap;
-    public GameObject groundTilemapObject;
+    public DWallManager groundTilemapObject;
     [SerializeField] private Tilemap collisionTilemap;
     public PlayerInput controls;
 
@@ -17,7 +17,8 @@ public class movement : MonoBehaviour
     private bool CanMove(Vector2 direction)
     {
         Vector3Int gridPosition = groundTilemap.WorldToCell(transform.position + (Vector3)direction);
-        if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition) || groundTilemapObject.GetComponent<DWallManager>().Contains(gridPosition.x, gridPosition.y))
+        Debug.Log(gridPosition.x + " " + gridPosition.y);
+        if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition) || groundTilemapObject.Contains(gridPosition.x, gridPosition.y))
             return false;
         return true;
     }

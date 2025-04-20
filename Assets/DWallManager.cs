@@ -1,22 +1,36 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class DWallManager : MonoBehaviour
-{
+{ 
+    public bool[,]  DWallList = new bool[1000, 1000]; 
 
-
-    public bool[,]  DWallList;
-
-    public bool Contains(int x, int y)
+    public bool Contains(int X, int Y)
     {
-        if (DWallList[x, y] == false)
+
+        if (DWallList[X+20, Y+20] == true)
             return true;
         return false;
     }
 
 
-    public void ADDToList(int x, int y)
+    public void ADDToList(int X, int Y)
     {
-        DWallList[x, y] = true;
+
+        DWallList[X+20, Y+20] = true;
     }
+    public void ADDToList(float X, float Y)
+    {
+
+        DWallList[(int)X+20, (int)Y+20] = true;
+    }
+
+    public void RemoveFromList(float X, float Y)
+    {
+
+        DWallList[(int)X+20, (int)Y+20] = false;
+    }
+
+
 }
