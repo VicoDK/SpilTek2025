@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 828c9cb9b12268f4087c906b15714ab6
+guid: 14701ea297e3b404e8b64ec46fff1ea8
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -36,7 +36,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 50
+    spritePixelsToUnits: 60
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638807630740249499
+  platformSettingsDirtyTick: 638807641901260169
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: tabel
+  - name: Frame_0
     originalName: 
-    pivot: {x: 0.51282054, y: 0.5135135}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 39
-      height: 37
-    spriteID: 80c009c92dc688f478a94e6bcf4506ed
+      width: 64
+      height: 64
+    spriteID: afcae37890d8d0747ae3897f85e815cc
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,29 +144,59 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 76
+      width: 64
+      height: 64
+    spriteID: 3dae37a9d53d93c4d8902e1e0f8730c1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 76}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2515779492
+      value0: 3561021050
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: tabel
+    name: walltile
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: tabel
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 12
-        y: 13
-        width: 39
-        height: 37
-      spriteId: 80c009c92dc688f478a94e6bcf4506ed
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      spriteId: afcae37890d8d0747ae3897f85e815cc
+    - name: Frame_1
+      frameIndex: 1
+      additiveSortOrder: 0
+      cellRect:
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      spriteId: 3dae37a9d53d93c4d8902e1e0f8730c1
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -210,4 +240,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 64, y: 64}
-  previousTextureSize: {x: 64, y: 64}
+  previousTextureSize: {x: 128, y: 256}

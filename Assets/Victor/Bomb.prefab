@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24bc9d7cf2f13c4b82819ffead8b668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Length: 4
+  Length: 2
   Fire: {fileID: 6121776174702900326, guid: 0a51da5b48464384083f82f1152b17d5, type: 3}
   dWallManager: {fileID: 0}
 --- !u!1 &5580706887631153893
