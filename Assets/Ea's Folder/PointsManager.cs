@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,12 +14,15 @@ public class PointsManager : MonoBehaviour
     private static PointsManager instance;
     public PlayerManager[] player;
     public GameObject PlayerPrefab;
+    public Text MessageText;
     private PlayerManager wins;
 
     private int RoundNumber;
     private PlayerManager RoundWinner;
     private PlayerManager GameWinner;
     private WaitForSeconds StartWait;
+    private WaitForSeconds EndWait;
+
 
 
     public static PointsManager Instance 
@@ -83,9 +87,64 @@ public class PointsManager : MonoBehaviour
     {
         DisablePlayerControl();
         RoundWinner = null;
+
+        RoundWinner = GetRoundWinner();
+        //get round winner
+        if (RoundWinner != null)
+            RoundWinner.Wins++;
+        GameWinner = GetGameWinner();
+
+        string message = EndMessage();
+        MessageText.text = message;
+        yield return EndWait;
+        
+    }
+    private string EndMessage()
+    {
        
-    //get round winner
-        throw new NotImplementedException();
+        string message = "tie";
+
+        
+        if (RoundWinner != null)
+            message = RoundWinner.ColoredPlayerText + " Wins round";
+
+        
+        message += "\n\n\n\n";
+
+        
+        for (int i = 0; i < player.Length; i++)
+        {
+            message += player[i].ColoredPlayerText + ": " + player[i].Wins + " WINS\n";
+        }
+
+        
+        if (GameWinner != null)
+            message = GameWinner.ColoredPlayerText + " Wins game";
+
+        return message;
+    }
+
+    private PlayerManager GetGameWinner()
+    {
+        for(int i = 0; i < player.Length; i++) 
+        {
+            if (player[i].Wins == NumberRoundsToWin)
+                return player[i];
+        }
+        return null;
+    }
+
+    private PlayerManager GetRoundWinner()
+    {
+        for(int i = 0; i < player.Length; i++) 
+        {
+            if (player[i].Player.activeSelf) 
+            {
+            return player[i];
+            }
+        }
+        return null;
+        
     }
 
     private IEnumerator RoundPlaying()
