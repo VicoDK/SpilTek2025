@@ -17,7 +17,6 @@ public class movement : MonoBehaviour
     private bool CanMove(Vector2 direction)
     {
         Vector3Int gridPosition = groundTilemap.WorldToCell(transform.position + (Vector3)direction);
-        Debug.Log(gridPosition.x + " " + gridPosition.y);
         if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition) || groundTilemapObject.Contains(gridPosition.x, gridPosition.y))
             return false;
         return true;
