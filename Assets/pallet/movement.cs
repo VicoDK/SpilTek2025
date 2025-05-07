@@ -30,4 +30,11 @@ public class movement : MonoBehaviour
 
         }
     }
+
+    void OnEnable()
+    {
+        collisionTilemap = GameObject.Find("Col").GetComponent<Tilemap>();
+        groundTilemap = GameObject.Find("ground").GetComponent<Tilemap>();
+        groundTilemapObject = GameObject.Find("Dwalls").GetComponent<DWallManager>();
+    }
 }
