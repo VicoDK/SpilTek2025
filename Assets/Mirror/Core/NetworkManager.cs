@@ -951,7 +951,7 @@ namespace Mirror
         }
 
         // finish load scene part for host mode. makes code easier and is
-        // necessary for FinishStartHost later.
+        // necessary for FinishspawnHost later.
         // (the 3 things have to happen in that exact order)
         void FinishLoadSceneHost()
         {
@@ -1059,6 +1059,7 @@ namespace Mirror
         /// <summary>Get the next NetworkStartPosition based on the selected PlayerSpawnMethod.</summary>
         public virtual Transform GetStartPosition()
         {
+             
             // first remove any dead transforms
             startPositions.RemoveAll(t => t == null);
 
