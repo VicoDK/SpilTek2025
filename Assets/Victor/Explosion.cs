@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.Design;
+using Mirror;
 using UnityEngine;
 
 public enum dir
@@ -9,7 +10,7 @@ public enum dir
     West,
     East
 }
-public class Explosion : MonoBehaviour
+public class Explosion : NetworkBehaviour
 {
     
     public RaycastHit2D[] hitsNorth;
@@ -32,11 +33,13 @@ public class Explosion : MonoBehaviour
         CheckHit(hitsSouth);
         CheckHit(hitsWest);
         CheckHit(hitsEast);
+        NetworkServer.Destroy(transform.parent.gameObject);
         Destroy(transform.parent.gameObject);
         GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(transform.position.x-0.5f, transform.position.y-0.5f);
 
     }
 
+    [Command(requiresAuthority = false)]
     private void CheckHit(RaycastHit2D[] hitsNorth)
     {
         foreach (RaycastHit2D hit in hitsNorth)
@@ -57,6 +60,7 @@ public class Explosion : MonoBehaviour
 
     
                 GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(hit.transform.position.x-0.5f, hit.transform.position.y-0.5f);
+                NetworkServer.Destroy(hit.transform.gameObject);
                 Destroy(hit.transform.gameObject);
             }
             else if (hit.transform.gameObject.tag == "Wall")

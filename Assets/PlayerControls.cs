@@ -19,13 +19,23 @@ public class PlayerControls : NetworkBehaviour
 
         if (controls.actions.FindAction("BombAttack").triggered && !isAttacking)
         {
-            isAttacking = true;
-            bombe = Instantiate(bomb, transform.position, Quaternion.identity);
-            bombe.GetComponent<BomExplode>().Player = this.gameObject;
-            NetworkServer.Spawn(bombe);
+            SpawnBomb();
+            
+           
         }
         
     }
+
+    [Command]
+    void SpawnBomb()
+    {
+        isAttacking = true;
+        bombe = Instantiate(bomb, transform.position, Quaternion.identity);
+        bombe.GetComponent<BomExplode>().Player = this.gameObject;
+        NetworkServer.Spawn(bombe);
+    }
+
+
 
 
 }

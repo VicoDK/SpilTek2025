@@ -42,6 +42,19 @@ public class CusNetworkManager : NetworkManager
         startPositions = _StartPositions;
         
     }
+
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+        {
+            Transform startPos = startPositions[Random.Range(0, startPositions.Count)];
+            GameObject player = startPos != null
+                ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+                : Instantiate(playerPrefab);
+
+            // instantiating a "Player" prefab gives it the name "Player(clone)"
+            // => appending the connectionId is WAY more useful for debugging!
+            player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
+            NetworkServer.AddPlayerForConnection(conn, player);
+        }
     
 
 }
