@@ -5,25 +5,31 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.VFX;
 
 public class PointsManager : MonoBehaviour
 {
     public int NumberRoundsToWin;
-    public Counter counter;
+    
     private static PointsManager instance;
     public PlayerManager[] player;
     public GameObject PlayerPrefab;
-    public Text MessageText;
+    public TMP_Text MessageText;
     private PlayerManager wins;
-
+    private PointsManager pointsManager;
+    public TMP_Text CountText;
     private int RoundNumber;
     private PlayerManager RoundWinner;
     private PlayerManager GameWinner;
     private WaitForSeconds StartWait;
     private WaitForSeconds EndWait;
 
+    private void SetCountText()
+    {
+        CountText.text = pointsManager.RoundNumber.ToString();
 
+    }
 
     public static PointsManager Instance 
     {
@@ -52,6 +58,7 @@ public class PointsManager : MonoBehaviour
     }
     private void Start()
     {
+        SetCountText();
         SpawnAllPlayers();
         StartCoroutine(GameLoop());
     }
