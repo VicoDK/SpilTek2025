@@ -12,52 +12,35 @@ public class PointsManager : MonoBehaviour
 {
     public int NumberRoundsToWin;
     
-    private static PointsManager instance;
+    
+
     public PlayerManager[] player;
+
     public GameObject PlayerPrefab;
+
     public TMP_Text MessageText;
-    private PlayerManager wins;
-    private PointsManager pointsManager;
+   
     public TMP_Text CountText;
+
+
     private int RoundNumber;
     private PlayerManager RoundWinner;
     private PlayerManager GameWinner;
+
     private WaitForSeconds StartWait;
     private WaitForSeconds EndWait;
 
     private void SetCountText()
     {
-        CountText.text = pointsManager.RoundNumber.ToString();
+        CountText.text = RoundNumber.ToString();
 
     }
 
-    public static PointsManager Instance 
-    {
-        get { return instance; }
-        set { instance = value; }
-    }
-
-    public int amount;
-    public int Amount 
-    {
-        get { return amount; }
-        set {  amount = value; }
-
-    }
-    private void Awake()
-    {
-        if (instance == null) 
-        {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
-        }
-        else 
-        {
-        Destroy(gameObject);
-        }
-    }
+   
     private void Start()
     {
+        StartWait = new WaitForSeconds(3f);
+        EndWait = new WaitForSeconds(3f);
         SetCountText();
         SpawnAllPlayers();
         StartCoroutine(GameLoop());
@@ -67,7 +50,7 @@ public class PointsManager : MonoBehaviour
     {
         for (int i = 0; i < player.Length; i++) 
         {
-            player[i].Player = Instantiate(PlayerPrefab, player[i].SpawnPoint.position, player[i].SpawnPoint.rotation) as GameObject;
+            player[i].Player = Instantiate(PlayerPrefab, player[i].SpawnPoints[i].position, player[i].SpawnPoints[i].rotation) as GameObject;
             player[i].PlayerNumber = i + 1;
             player[i].SetUp();
         }
@@ -79,7 +62,7 @@ public class PointsManager : MonoBehaviour
         yield return StartCoroutine(RoundPlaying());
         yield return StartCoroutine(RoundEnding());
 
-        if (wins != null) 
+        if (GameWinner != null) 
         {
             SceneManager.LoadScene("EasScene");
         }
