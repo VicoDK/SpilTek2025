@@ -39,7 +39,7 @@ public class Explosion : NetworkBehaviour
 
     }
 
-    [Command(requiresAuthority = false)]
+    [Client]
     private void CheckHit(RaycastHit2D[] hitsNorth)
     {
         foreach (RaycastHit2D hit in hitsNorth)
@@ -60,8 +60,7 @@ public class Explosion : NetworkBehaviour
 
     
                 GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(hit.transform.position.x-0.5f, hit.transform.position.y-0.5f);
-                NetworkServer.Destroy(hit.transform.gameObject);
-                Destroy(hit.transform.gameObject);
+                CmdDestroyObject(hit.transform.gameObject);
             }
             else if (hit.transform.gameObject.tag == "Wall")
             {
@@ -70,5 +69,22 @@ public class Explosion : NetworkBehaviour
             }
 
         }
+    }
+
+    [Command]
+    private void CmdDestroyObject(GameObject obj)
+    {
+        NetworkIdentity objIdentity = NetworkServer.spawned[obj.GetComponent<NetworkIdentity>().netId];
+        if (objIdentity != null)
+        {
+            Debug.Log("Destroying object: " + objIdentity.name);
+            NetworkServer.Destroy(objIdentity.gameObject);
+        }
+
+        /*
+        Debug.Log("Destroying object: " + obj.name);
+        if (!obj) return;
+
+        NetworkServer.Destroy(obj);*/
     }
 }

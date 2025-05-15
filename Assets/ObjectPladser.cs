@@ -1,15 +1,16 @@
+using Mirror;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
-public class ObjectPladser : MonoBehaviour
+public class ObjectPladser : NetworkBehaviour
 {
     public GameObject[] Object; // The prefab to instantiate at each tile
     public Tilemap[] tilemap; // Reference to the Tilemap component
 
-    void Start()
+    public override void OnStartServer()
     {
         for (int i = 0; i < tilemap.Length; i++)
         {
@@ -36,7 +37,8 @@ public class ObjectPladser : MonoBehaviour
                 if (tile != null)
                 {
                     Vector3 worldPosition = tilemap[index].GetCellCenterWorld(new Vector3Int(x, y, 0));
-                    Instantiate(Object[index], worldPosition, Quaternion.identity, this.transform);
+                    GameObject obj =Instantiate(Object[index], worldPosition, Quaternion.identity, this.transform);
+                    NetworkServer.Spawn(obj);
                     if (Object[index].name == "DWall")
                     {
 

@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.InputSystem;
-public class movement : MonoBehaviour
+using Mirror;
+public class movement : NetworkBehaviour
 {
     [SerializeField] private Tilemap groundTilemap;
     public DWallManager groundTilemapObject;
@@ -24,6 +25,8 @@ public class movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer) return;
+
         if (controls.actions.FindAction("movement").triggered)
         {
             Move(controls.actions.FindAction("movement").ReadValue<Vector2>());

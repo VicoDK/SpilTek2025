@@ -48,7 +48,7 @@ public class CusNetworkManager : NetworkManager
             Transform startPos = startPositions[Random.Range(0, startPositions.Count)];
             GameObject player = startPos != null
                 ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-                : Instantiate(playerPrefab);
+                : null;
 
             // instantiating a "Player" prefab gives it the name "Player(clone)"
             // => appending the connectionId is WAY more useful for debugging!

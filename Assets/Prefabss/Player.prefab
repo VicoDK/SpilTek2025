@@ -187,8 +187,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 816dcf17a4f2608498a7c228da16d28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   controls: {fileID: 6954215063098613969}
   bomb: {fileID: 5580706887631153893, guid: cf2c809b62f5d7c43bcea904d0c1ac2a, type: 3}
+  bombe: {fileID: 0}
   isAttacking: 0
 --- !u!114 &6954215063098613969
 MonoBehaviour:
