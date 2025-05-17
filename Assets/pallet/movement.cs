@@ -27,6 +27,16 @@ public class movement : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+        if (collisionTilemap == null)
+            collisionTilemap = GameObject.Find("Col").GetComponent<Tilemap>();
+
+        if (groundTilemap == null)
+            groundTilemap = GameObject.Find("ground").GetComponent<Tilemap>();
+
+        if (groundTilemapObject == null)
+            groundTilemapObject = GameObject.Find("Dwalls").GetComponent<DWallManager>();
+
+
         if (controls.actions.FindAction("movement").triggered)
         {
             Move(controls.actions.FindAction("movement").ReadValue<Vector2>());
@@ -34,10 +44,23 @@ public class movement : NetworkBehaviour
         }
     }
 
-    void OnEnable()
+    void Awake()
     {
-        collisionTilemap = GameObject.Find("Col").GetComponent<Tilemap>();
-        groundTilemap = GameObject.Find("ground").GetComponent<Tilemap>();
-        groundTilemapObject = GameObject.Find("Dwalls").GetComponent<DWallManager>();
+        if (controls == null)
+            controls = GetComponent<PlayerInput>();
+
+        // Disable input for non-local players
+        if (!isLocalPlayer && controls != null)
+            controls.enabled = false;
     }
+
+    public override void OnStartLocalPlayer()
+    {
+        if (controls == null)
+            controls = GetComponent<PlayerInput>();
+        controls.enabled = true;
+    }
+
+
+  
 }

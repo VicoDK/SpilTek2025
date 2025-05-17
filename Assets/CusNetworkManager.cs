@@ -6,20 +6,29 @@ public class CusNetworkManager : NetworkManager
 {
     public GameObject[] Avatars;
     public List<Transform> _StartPositions;
-    
+
     void onCreateCharector(NetworkConnectionToClient Connection, CreateAvatarMes message)
     {
-        GameObject Player = Instantiate(Avatars[message.avatarIndex]);
+        /*GameObject Player = Instantiate(Avatars[message.avatarIndex]);
         Player player = Player.GetComponent<Player>();
         //player.Name = "Gilbot-" + Random.Range(0, 1000000);
 
-        NetworkServer.AddPlayerForConnection(Connection, Player);
+        NetworkServer.AddPlayerForConnection(Connection, Player);*/
+        Transform startPos = startPositions[Random.Range(0, startPositions.Count)];
+            GameObject player = startPos != null
+                ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+                : null;
+
+            // instantiating a "Player" prefab gives it the name "Player(clone)"
+            // => appending the connectionId is WAY more useful for debugging!
+            player.name = $"{playerPrefab.name} [connId={Connection.connectionId}]";
+            NetworkServer.AddPlayerForConnection(Connection, player);
 
     }
 
     public override void OnStartHost()
     {
-        base.OnStartHost();
+
         NetworkServer.RegisterHandler<CreateAvatarMes>(onCreateCharector);
 
     }
@@ -45,7 +54,7 @@ public class CusNetworkManager : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
         {
-            Transform startPos = startPositions[Random.Range(0, startPositions.Count)];
+            /*Transform startPos = startPositions[Random.Range(0, startPositions.Count)];
             GameObject player = startPos != null
                 ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
                 : null;
@@ -53,7 +62,7 @@ public class CusNetworkManager : NetworkManager
             // instantiating a "Player" prefab gives it the name "Player(clone)"
             // => appending the connectionId is WAY more useful for debugging!
             player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
-            NetworkServer.AddPlayerForConnection(conn, player);
+            NetworkServer.AddPlayerForConnection(conn, player);*/
         }
     
 

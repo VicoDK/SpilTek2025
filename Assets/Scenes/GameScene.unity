@@ -348,7 +348,7 @@ MonoBehaviour:
   maxConnections: 100
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 8410317350564931941, guid: 6fec34d717b145a42bbe8f039c6f06d1, type: 3}
-  autoCreatePlayer: 1
+  autoCreatePlayer: 0
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 5580706887631153893, guid: cf2c809b62f5d7c43bcea904d0c1ac2a, type: 3}
@@ -356,8 +356,7 @@ MonoBehaviour:
   - {fileID: 6121776174702900326, guid: 0a51da5b48464384083f82f1152b17d5, type: 3}
   - {fileID: 5134402827896859388, guid: 14043108c343f85469df873801cdd631, type: 3}
   timeInterpolationGui: 0
-  Avatars:
-  - {fileID: 8410317350564931941, guid: 6fec34d717b145a42bbe8f039c6f06d1, type: 3}
+  Avatars: []
   _StartPositions:
   - {fileID: 846263971}
   - {fileID: 660195668}

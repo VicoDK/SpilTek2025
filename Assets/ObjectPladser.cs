@@ -10,7 +10,7 @@ public class ObjectPladser : NetworkBehaviour
     public GameObject[] Object; // The prefab to instantiate at each tile
     public Tilemap[] tilemap; // Reference to the Tilemap component
 
-    public override void OnStartServer()
+    public void Start()
     {
         for (int i = 0; i < tilemap.Length; i++)
         {
