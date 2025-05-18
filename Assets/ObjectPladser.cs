@@ -37,7 +37,7 @@ public class ObjectPladser : NetworkBehaviour
                 if (tile != null)
                 {
                     Vector3 worldPosition = tilemap[index].GetCellCenterWorld(new Vector3Int(x, y, 0));
-                    GameObject obj =Instantiate(Object[index], worldPosition, Quaternion.identity, this.transform);
+                    GameObject obj = Instantiate(Object[index], worldPosition, Quaternion.identity, this.transform);
                     NetworkServer.Spawn(obj);
                     if (Object[index].name == "DWall")
                     {

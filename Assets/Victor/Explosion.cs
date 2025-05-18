@@ -21,6 +21,7 @@ public class Explosion : NetworkBehaviour
     public GameObject Fire;
     public DWallManager dWallManager;
 
+    [Client]    
     void Start()
     {
 
@@ -33,9 +34,13 @@ public class Explosion : NetworkBehaviour
         CheckHit(hitsSouth);
         CheckHit(hitsWest);
         CheckHit(hitsEast);
+
+        GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(transform.position.x - 0.5f, transform.position.y - 0.5f);
+
         NetworkServer.Destroy(transform.parent.gameObject);
         Destroy(transform.parent.gameObject);
-        GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(transform.position.x-0.5f, transform.position.y-0.5f);
+        Debug.Log("Explosion");
+        
 
     }
 
@@ -51,40 +56,23 @@ public class Explosion : NetworkBehaviour
             else if (hit.transform.gameObject.tag == "Air")
             {
 
-                Instantiate(Fire, hit.transform.position, Quaternion.identity);
+                GameObject fire = Instantiate(Fire, hit.transform.position, Quaternion.identity);
+                NetworkServer.Spawn(fire);
 
             }
             else if (hit.transform.gameObject.tag == "Destructible")
             {
 
-
-    
-                GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(hit.transform.position.x-0.5f, hit.transform.position.y-0.5f);
+                GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(hit.transform.position.x - 0.5f, hit.transform.position.y - 0.5f);
                 NetworkServer.Destroy(hit.transform.gameObject);
             }
             else if (hit.transform.gameObject.tag == "Wall")
             {
-                
+
                 return;
             }
 
         }
     }
 
-    [Command]
-    private void CmdDestroyObject(GameObject obj)
-    {
-        NetworkIdentity objIdentity = NetworkServer.spawned[obj.GetComponent<NetworkIdentity>().netId];
-        if (objIdentity != null)
-        {
-            Debug.Log("Destroying object: " + objIdentity.name);
-            NetworkServer.Destroy(objIdentity.gameObject);
-        }
-
-        /*
-        Debug.Log("Destroying object: " + obj.name);
-        if (!obj) return;
-
-        NetworkServer.Destroy(obj);*/
-    }
 }
