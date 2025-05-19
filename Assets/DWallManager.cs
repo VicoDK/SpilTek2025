@@ -1,15 +1,20 @@
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class DWallManager : MonoBehaviour
-{ 
-    public bool[,]  DWallList = new bool[1000, 1000]; 
+public class DWallManager : NetworkBehaviour
+{
+    // Define a SyncDictionary for Vector2 and bool
+    public class SyncDWallDict : SyncDictionary<Vector2, bool> { }
+
+    // Make it a SyncVar so Mirror can sync it
+    public SyncDWallDict DWallData = new SyncDWallDict();
 
     public bool Contains(int X, int Y)
     {
 
-        if (DWallList[X+20, Y+20] == true)
+        if (DWallData[new Vector2(X+20, Y+20)] == true)
             return true;
         return false;
     }
@@ -18,18 +23,18 @@ public class DWallManager : MonoBehaviour
     public void ADDToList(int X, int Y)
     {
 
-        DWallList[X+20, Y+20] = true;
+        DWallData[new Vector2(X+20, Y+20)] = true;
     }
     public void ADDToList(float X, float Y)
     {
 
-        DWallList[(int)X+20, (int)Y+20] = true;
+        DWallData[new Vector2(X+20, Y+20)] = true;
     }
 
     public void RemoveFromList(float X, float Y)
     {
 
-        DWallList[(int)X+20, (int)Y+20] = false;
+        DWallData[new Vector2(X+20, Y+20)] = false;
     }
 
 

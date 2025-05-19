@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1807340083370627836}
   - component: {fileID: 4543199277663100764}
   - component: {fileID: -3891458277996343887}
-  - component: {fileID: -7761448750227217519}
   m_Layer: 0
   m_Name: DWall
   m_TagString: Destructible
@@ -168,32 +167,3 @@ MonoBehaviour:
   serverOnly: 1
   visible: 0
   hasSpawned: 0
---- !u!114 &-7761448750227217519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451743185543533615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  target: {fileID: 5473275127302390358}
-  clientAuthority: 0
-  syncPosition: 1
-  syncRotation: 1
-  syncScale: 0
-  showGizmos: 0
-  showOverlay: 0
-  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  onlySyncOnChange: 1
-  onlySyncOnChangeCorrectionMultiplier: 2
-  rotationSensitivity: 0.01
-  compressRotation: 0
-  positionPrecision: 0.01
-  scalePrecision: 0.01

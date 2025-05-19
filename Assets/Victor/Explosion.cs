@@ -21,30 +21,26 @@ public class Explosion : NetworkBehaviour
     public GameObject Fire;
     public DWallManager dWallManager;
 
-    [Client]    
     void Start()
     {
 
-        hitsNorth = Physics2D.RaycastAll(transform.position, Vector2.up, Length);
-        hitsSouth = Physics2D.RaycastAll(transform.position, Vector2.down, Length);
-        hitsWest = Physics2D.RaycastAll(transform.position, Vector2.left, Length);
-        hitsEast = Physics2D.RaycastAll(transform.position, Vector2.right, Length);
+            hitsNorth = Physics2D.RaycastAll(transform.position, Vector2.up, Length);
+            hitsSouth = Physics2D.RaycastAll(transform.position, Vector2.down, Length);
+            hitsWest = Physics2D.RaycastAll(transform.position, Vector2.left, Length);
+            hitsEast = Physics2D.RaycastAll(transform.position, Vector2.right, Length);
 
-        CheckHit(hitsNorth);
-        CheckHit(hitsSouth);
-        CheckHit(hitsWest);
-        CheckHit(hitsEast);
+            CheckHit(hitsNorth);
+            CheckHit(hitsSouth);
+            CheckHit(hitsWest);
+            CheckHit(hitsEast);
 
-        GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(transform.position.x - 0.5f, transform.position.y - 0.5f);
+            GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(transform.position.x - 0.5f, transform.position.y - 0.5f);
+            NetworkServer.Destroy(transform.parent.gameObject);
 
-        NetworkServer.Destroy(transform.parent.gameObject);
-        Destroy(transform.parent.gameObject);
-        Debug.Log("Explosion");
-        
 
     }
 
-    [Client]
+
     private void CheckHit(RaycastHit2D[] hitsNorth)
     {
         foreach (RaycastHit2D hit in hitsNorth)
@@ -56,8 +52,8 @@ public class Explosion : NetworkBehaviour
             else if (hit.transform.gameObject.tag == "Air")
             {
 
-                GameObject fire = Instantiate(Fire, hit.transform.position, Quaternion.identity);
-                NetworkServer.Spawn(fire);
+                GameObject _fire = Instantiate(Fire, hit.transform.position, Quaternion.identity);
+                NetworkServer.Spawn(_fire);
 
             }
             else if (hit.transform.gameObject.tag == "Destructible")

@@ -21,6 +21,7 @@ public class ObjectPladser : NetworkBehaviour
 
     }
 
+    
     void InstantiatePoints(int index)
     {
 
@@ -31,7 +32,7 @@ public class ObjectPladser : NetworkBehaviour
 
             for (int y = bounds.y; y < bounds.yMax; y++)
             {
-
+                tilemap[index].GetComponent<DWallManager>().RemoveFromList(x, y);
                 TileBase tile = tilemap[index].GetTile(new Vector3Int(x, y, 0));
 
                 if (tile != null)
@@ -39,10 +40,9 @@ public class ObjectPladser : NetworkBehaviour
                     Vector3 worldPosition = tilemap[index].GetCellCenterWorld(new Vector3Int(x, y, 0));
                     GameObject obj = Instantiate(Object[index], worldPosition, Quaternion.identity, this.transform);
                     NetworkServer.Spawn(obj);
-                    if (Object[index].name == "DWall")
+                    if (obj.name.Contains("DWall"))
                     {
-
-                        Object[index].GetComponent<DWallInfo>().AddNumber(x, y);
+                        obj.GetComponent<DWallInfo>().AddNumber(x, y);
                         tilemap[index].GetComponent<DWallManager>().ADDToList(x, y);
                     }
 
