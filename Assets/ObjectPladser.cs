@@ -14,7 +14,7 @@ public class ObjectPladser : NetworkBehaviour
     {
         for (int i = 0; i < tilemap.Length; i++)
         {
-
+            Debug.Log("Tilemap: " + tilemap[i].name);
             InstantiatePoints(i);
         }
 
@@ -32,7 +32,10 @@ public class ObjectPladser : NetworkBehaviour
 
             for (int y = bounds.y; y < bounds.yMax; y++)
             {
-                tilemap[index].GetComponent<DWallManager>().RemoveFromList(x, y);
+                if (index == 0)
+                {
+                    tilemap[index].GetComponent<DWallManager>().RemoveFromList(x, y);
+                }
                 TileBase tile = tilemap[index].GetTile(new Vector3Int(x, y, 0));
 
                 if (tile != null)
