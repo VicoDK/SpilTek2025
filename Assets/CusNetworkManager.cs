@@ -15,6 +15,7 @@ public class CusNetworkManager : NetworkManager
 
         NetworkServer.AddPlayerForConnection(Connection, Player);*/
         Transform startPos = startPositions[Random.Range(0, startPositions.Count)];
+        startPositions.Remove(startPos);
             GameObject player = startPos != null
                 ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
                 : null;
