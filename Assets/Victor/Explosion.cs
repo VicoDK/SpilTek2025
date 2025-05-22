@@ -62,7 +62,7 @@ public class Explosion : NetworkBehaviour
                 GameObject.Find("Dwalls").GetComponent<DWallManager>().RemoveFromList(hit.transform.position.x-0.5f, hit.transform.position.y-0.5f);
                 NetworkServer.Destroy(hit.transform.gameObject);
             }
-            else if (hit.transform.gameObject.tag == "Wall")
+            else if (hit.transform.gameObject.tag == "Wall" || hit.transform.gameObject.tag == "Fire")
             {
                 
                 return;

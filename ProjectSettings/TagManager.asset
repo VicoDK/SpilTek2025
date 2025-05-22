@@ -7,6 +7,7 @@ TagManager:
   - Destructible
   - Wall
   - Air
+  - Fire
   layers:
   - Default
   - TransparentFX
