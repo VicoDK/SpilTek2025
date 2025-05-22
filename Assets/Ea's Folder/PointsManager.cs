@@ -75,10 +75,10 @@ public class PointsManager : MonoBehaviour
 
     private IEnumerator RoundEnding()
     {
-        DisablePlayerControl();
+        //DisablePlayerControl();
         RoundWinner = null;
 
-        RoundWinner = GetRoundWinner();
+        //RoundWinner = GetRoundWinner();
         //get round winner
         if (RoundWinner != null)
             RoundWinner.Wins++;
@@ -124,7 +124,7 @@ public class PointsManager : MonoBehaviour
         return null;
     }
 
-    private PlayerManager GetRoundWinner()
+    /*private PlayerManager GetRoundWinner()
     {
         for(int i = 0; i < player.Length; i++) 
         {
@@ -135,11 +135,11 @@ public class PointsManager : MonoBehaviour
         }
         return null;
         
-    }
+    }*/
 
     private IEnumerator RoundPlaying()
     {
-        EnablePlayerControl();
+        //EnablePlayerControl();
         while (!OnePlayerLeft()) 
         {
             yield return null;
@@ -150,7 +150,7 @@ public class PointsManager : MonoBehaviour
     private IEnumerator Roundstarting()
     {
         ResetAllPlayers();
-        DisablePlayerControl();
+        //DisablePlayerControl();
         RoundNumber++;
         yield return StartWait;
     }
@@ -162,21 +162,21 @@ public class PointsManager : MonoBehaviour
             player[i].Reset();
         }
     }
-    private void EnablePlayerControl() 
+    /*private void EnablePlayerControl() 
     {
         for (int i = 0; i < player.Length; i++)
         {
             player[i].EnableControl();
         }
-    }
+    }*/
 
-    private void DisablePlayerControl()
+    /*private void DisablePlayerControl()
     {
         for (int i = 0; i < player.Length; i++)
         {
             player[i].DisabledControl();
         }
-    }
+    }*/
     private bool OnePlayerLeft() 
     {
         int NumberPlayerLeft = 0;

@@ -6,23 +6,36 @@ using System.Data;
 using NUnit.Framework;
 using System;
 using Unity.VisualScripting;
+using Mirror;
 
 public class DBScript : MonoBehaviour
 {
     private string dataBaseName = "URI=file:myDB.db";
 
+    private PointsManager points;
+    public Scoreboard scoreboard;
+    private bool PlayedOnce;
+
+
     // Start is called before the first frame update
     void Start()
     {
         CreateDB();
-        
-        
+        PlayedOnce = false;
+       
+
     }
 
     // Update is called once per frame
-    void Update()
+    public void click()
     {
-        
+        if (scoreboard.winner != "shkdfhsjgfhgsfkjsfgdsajlgefræpsagfuisgefgbweKAYHPSEFUHUFD" && !PlayedOnce )
+        {
+            Debug.Log(scoreboard.winner);
+            CreatePlayer(scoreboard.winner,Pointchecker(scoreboard.winner) + 1);
+            Debug.Log("miv");
+            PlayedOnce=true;
+        }
     }
 
     //makes a new db (if it doesn't exist) and add a table "players" (if it doesn't exist)
@@ -30,13 +43,13 @@ public class DBScript : MonoBehaviour
     {
         //creates a connection object
         using SqliteConnection connection = new SqliteConnection(dataBaseName);
-            //open the connection
-            connection.Open();
+        //open the connection
+        connection.Open();
 
-        using SqliteCommand command = new ("create table if not exists player( name TEXT,points INTEGER)",connection);
-       
+        using SqliteCommand command = new("create table if not exists player( name TEXT,point INTEGER)", connection);
+
         command.ExecuteNonQuery();
-        
+
         Debug.Log("DB created");
     }
 
@@ -45,19 +58,39 @@ public class DBScript : MonoBehaviour
     {
         using SqliteConnection connection = new SqliteConnection(dataBaseName);
         connection.Open();
-        using SqliteCommand command = new("INSERT INTO Player (id,name,point) VALUES (@name,@point)", connection);
-        
+        using SqliteCommand command = new("INSERT INTO Player (name,point) VALUES (@name,@point)", connection);
+
         command.Parameters.AddWithValue("@name", name);
-        command.Parameters.AddWithValue("@age", point);
-        
-       
-      
+        command.Parameters.AddWithValue("@point", point);
+
+
+
         command.ExecuteNonQuery();
-        
-        
+
+
         Debug.Log("Data inserted");
     }
-    
+
+    public int Pointchecker(string name)
+    {
+        int Point = 0;
+        using (SqliteConnection connection = new SqliteConnection(dataBaseName))
+        {
+            connection.Open();
+
+            using SqliteCommand command = new SqliteCommand("SELECT * FROM Player WHERE name = @name", connection);
+            command.Parameters.AddWithValue("@name", name);
+
+            using SqliteDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                Point = Convert.ToInt32(reader["point"]);
+            }
+        }
+        return Point;
+    }
+
+
 
     /* public void ReadRecords()
      {
@@ -84,4 +117,5 @@ public class DBScript : MonoBehaviour
              }
          }
      }*/
+
 }
