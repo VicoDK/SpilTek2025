@@ -3,27 +3,29 @@ using Mirror;
 using TMPro;
 using NUnit.Framework;
 using Unity.VisualScripting;
+using UnityEngine.TextCore.Text;
+using System.Collections.Generic;
 
-public class characterSelect : MonoBehaviour
+public class characterSelect : NetworkBehaviour
 {
     /*[SerializeField] private GameObject characterSelectDisplay = default;
     [SerializeField] private Transform characterPreviewParent = default;
     [SerializeField] private Character[] characters = default;
 
-    private int currentCharacterIndex = 0;
     private List<GameObject> characterInstances = new List<GameObject>();
+    private int currentCharacterIndex = 0;
 
     public override void OnStartClient()
     {
-        if( characterPreviewParent,childCount==0)
+        if( characterPreviewParent.childCount==0)
         {
             foreach (var character in characters)
             {
                 GameObject characterInstance =
-                    Instantiate(character.CharacterPreviewPrefab, characterPreviewParent);
+                    Instantiate(characters.characterPreviewParent, characterPreviewParent);
                 characterInstance.SetActive(false);
 
-                characterInstance.AddComponent(characterInstance);
+                //characterInstances.Add(characterInstance);
             }
         }
         characterInstances[currentCharacterIndex].SetActive(true);
@@ -37,7 +39,7 @@ public class characterSelect : MonoBehaviour
         characterSelectDisplay.SetActive(false);
     }
 
-    [Command(ignoreAuthority=true)]
+    [Command(requiresAuthority = true)]
     public void CmdSelect(int characterIndex, NetworkConnectionToClient sender=null)
     {
         GameObject characterInstance = Instantiate(characters[characterIndex].GameplayCharacterPrefab);
@@ -47,7 +49,7 @@ public class characterSelect : MonoBehaviour
     {
         characterInstances[currentCharacterIndex].SetActive(false);
 
-        currentCharacterIndex = (currentCharacterIndex + 1) % characters;
+        currentCharacterIndex = (currentCharacterIndex + 1) % characterInstances.Count;
 
         characterSelectDisplay.SetActive(true);
 
